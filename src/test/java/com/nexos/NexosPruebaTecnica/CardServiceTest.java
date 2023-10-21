@@ -77,7 +77,7 @@ public class CardServiceTest {
 	@Test()
 	void createCardShouldByCreateCardExitsClient() throws ApiErrorException {
 		cardClientRepository.saveAndFlush(Mocks.MOCK_CLIENT);
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		CardsProduct savedCard = cardProductRepository.findByProductNumber(testCard.getCardProductNumber());
 		assertThat(savedCard.getProductId() != null).isTrue();
@@ -85,7 +85,7 @@ public class CardServiceTest {
 
 	@Test()
 	void createCardShouldByCreateCardNotExitsClient() throws ApiErrorException {
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		CardsProduct savedCard = cardProductRepository.findByProductNumber(testCard.getCardProductNumber());
 		assertThat(savedCard.getProductId() != null).isTrue();
@@ -93,7 +93,7 @@ public class CardServiceTest {
 
 	@Test()
 	void createCardShouldByChangeActiveStatusCard() throws ApiErrorException, ApiNotFountException {
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		testCard = CardService.changeStatusCard(
 				CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -112,7 +112,7 @@ public class CardServiceTest {
 	@Test()
 	void createCardShouldByChangeStatusActiveExistCardNotInactive() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			CardsProduct savedCard = cardProductRepository.findByProductNumber(testCard.getCardProductNumber());
 			savedCard.setProductStatus(CardStatus.BLOCKED);
@@ -126,7 +126,7 @@ public class CardServiceTest {
 
 	@Test()
 	void createCardShouldByChangeStatusBlokedNotExistCard() throws ApiErrorException, ApiNotFountException {
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		testCard = CardService.changeStatusCard(
 				CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.BLOCKED);
@@ -153,7 +153,7 @@ public class CardServiceTest {
 
 	@Test()
 	void createCardShouldByRechargeCard() throws ApiErrorException, ApiNotFountException {
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		CardService.changeStatusCard(CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(),
 				CardStatus.ACTIVE);
@@ -214,7 +214,7 @@ public class CardServiceTest {
 	@Test()
 	void createCardShouldByRechargeCardNotActiveCard() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			CardService.rechargeBalance(CardOperationsDto.builder().currencyType("US")
 					.cardId(testCard.getCardProductNumber()).balance(BigDecimal.ONE).build());
@@ -225,7 +225,7 @@ public class CardServiceTest {
 
 	@Test()
 	void createCardShouldByConsultBalanceCard() throws ApiErrorException, ApiNotFountException {
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		CardService.changeStatusCard(CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(),
 				CardStatus.ACTIVE);

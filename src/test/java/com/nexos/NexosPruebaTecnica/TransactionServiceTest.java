@@ -55,7 +55,7 @@ public class TransactionServiceTest {
 
 	@Test
 	void registerpurchaseShouldByok() throws ApiErrorException, ApiNotFountException {
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		testCard = CardService.changeStatusCard(
 				CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -88,7 +88,7 @@ public class TransactionServiceTest {
 	@Test()
 	void registerpurchaseShouldByokNotValidPrice() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			transactionService.registerpurchase(TransactionOperationsDto.builder().cardId("123").price(null).build());
+			transactionService.registerpurchase(TransactionOperationsDto.builder().cardId("123456").price(null).build());
 		});
 		assertThat(ApiErrorException.class.equals(exception.getClass())
 				&& exception.getMessage().equals(Constants.INVALID_PRICE)).isTrue();
@@ -98,7 +98,7 @@ public class TransactionServiceTest {
 	void registerpurchaseShouldByokNotValidCurrency() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
 			transactionService.registerpurchase(
-					TransactionOperationsDto.builder().cardId("123").price(BigDecimal.TEN).currencyType("COP").build());
+					TransactionOperationsDto.builder().cardId("123456").price(BigDecimal.TEN).currencyType("COP").build());
 		});
 		assertThat(ApiErrorException.class.equals(exception.getClass())
 				&& exception.getMessage().equals(Constants.INVALID_CURRENCY)).isTrue();
@@ -108,7 +108,7 @@ public class TransactionServiceTest {
 	void registerpurchaseShouldByokNotFountcard() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiNotFountException.class, () -> {
 			transactionService.registerpurchase(
-					TransactionOperationsDto.builder().cardId("123").price(BigDecimal.TEN).currencyType("US").build());
+					TransactionOperationsDto.builder().cardId("123456").price(BigDecimal.TEN).currencyType("US").build());
 		});
 		assertThat(ApiNotFountException.class.equals(exception.getClass())
 				&& exception.getMessage().equals(Constants.NOT_FOUND_PRODUCT_NUMNBER)).isTrue();
@@ -117,7 +117,7 @@ public class TransactionServiceTest {
 	@Test()
 	void registerpurchaseShouldByokInactiveCard() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			transactionService.registerpurchase(TransactionOperationsDto.builder()
 					.cardId(testCard.getCardProductNumber()).price(BigDecimal.TEN).currencyType("US").build());
@@ -129,7 +129,7 @@ public class TransactionServiceTest {
 	@Test()
 	void registerpurchaseShouldByokBlokedCard() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			testCard = CardService.changeStatusCard(
 					CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.BLOCKED);
@@ -143,7 +143,7 @@ public class TransactionServiceTest {
 	@Test()
 	void registerpurchaseShouldByokExpiredCard() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			testCard = CardService.changeStatusCard(
 					CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -162,7 +162,7 @@ public class TransactionServiceTest {
 	@Test()
 	void registerpurchaseShouldByoknotBalanceAviableard() throws ApiErrorException, ApiNotFountException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			testCard = CardService.changeStatusCard(
 					CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -176,7 +176,7 @@ public class TransactionServiceTest {
 	@Test
 	void AnulledTransactionShouldByOK() throws ApiErrorException, ApiNotFountException {
 
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		testCard = CardService.changeStatusCard(
 				CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -204,7 +204,7 @@ public class TransactionServiceTest {
 	void AnulledTransactionShouldByNotFounTx() throws ApiNotFountException {
 		Exception exception = assertThrows(ApiNotFountException.class, () -> {
 			 transactionService.anulationTrasaction(TransactionOperationsDto.builder()
-					.cardId("123").currencyType("US").price(BigDecimal.TEN).transactionId(123l).build());
+					.cardId("123456").currencyType("US").price(BigDecimal.TEN).transactionId(123l).build());
 		});
 		assertThat(ApiNotFountException.class.equals(exception.getClass())
 				&& exception.getMessage().equals(Constants.NOT_FOUND_TRANSACTION)).isTrue();
@@ -214,7 +214,7 @@ public class TransactionServiceTest {
 	@Test
 	void AnulledTransactionShouldByNoyAnulledByTime() throws ApiErrorException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			testCard = CardService.changeStatusCard(
 					CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -241,7 +241,7 @@ public class TransactionServiceTest {
 	@Test
 	void AnulledTransactionShouldByNotValidTx() throws ApiErrorException {
 		Exception exception = assertThrows(ApiErrorException.class, () -> {
-			CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+			CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 					Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 			testCard = CardService.changeStatusCard(
 					CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);
@@ -264,7 +264,7 @@ public class TransactionServiceTest {
 	@Test
 	void ConsultTransactionShouldBy() throws ApiErrorException, ApiNotFountException {
 
-		CardProductDto testCard = CardService.createCard("123", Mocks.MOCK_CLIENT.getClientName(),
+		CardProductDto testCard = CardService.createCard("123456", Mocks.MOCK_CLIENT.getClientName(),
 				Mocks.MOCK_CLIENT.getClientSurName(), Mocks.MOCK_CLIENT.getClientIdentification());
 		testCard = CardService.changeStatusCard(
 				CardOperationsDto.builder().cardId(testCard.getCardProductNumber()).build(), CardStatus.ACTIVE);

@@ -65,6 +65,11 @@ public class CardService {
 				if (!Utils.isNumeric(clientIdentification)) {
 					throw new ApiErrorException(Constants.INVALID_CLIENT_ID);
 				}
+				
+				if(productId.length()!=6) 
+				{
+					throw new ApiErrorException(Constants.INVALID_PRODUCT_LENGTH);
+				}
 				String cardNumber = "";
 				// Se realiza iteracion para garantizar que el numero de tarjeta generado no
 				// exista en BD

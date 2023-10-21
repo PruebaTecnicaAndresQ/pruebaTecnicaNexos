@@ -9,6 +9,7 @@ public final class Constants {
 	public static final String UNAUTHORIZED = "Usuario no autorizado";
 	public static final String INVALID_PRODUCT_ID = "El número de prodúcto debe ser númerico";
 	public static final String INVALID_CLIENT_ID = "El número de identificación del cliente debe ser númerico";
+	public static final String INVALID_PRODUCT_LENGTH = "El producto debe ser de 6 digitos";
 	public static final String INVALID_PARAM_DATA = "Uno o mas campos estan vacios,verifique e intente de nuevo";
 	public static final String INVALID_PRODUCT_NUMNBER = "El número de tarjeta debe ser númerico";
 	public static final String NOT_FOUND_PRODUCT_NUMNBER = "El número de tarjeta no existe";

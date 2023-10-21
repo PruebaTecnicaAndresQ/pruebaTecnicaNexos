@@ -71,7 +71,7 @@ public class SecurityServiceTest {
 	@Test
 	void getTokenShouldByValidateToken() throws Exception {
 		JwtResponse token = securityService.getToken(Mocks.GET_PARAM(), "client_credentials");
-		MvcResult result = mvc.perform(get("/card/123/number?clientName=c&clientSurName=a&clientIdentification=1").contentType(MediaType.APPLICATION_JSON).header("authorization",token.getAccesstoken())				
+		MvcResult result = mvc.perform(get("/card/123456/number?clientName=c&clientSurName=a&clientIdentification=1").contentType(MediaType.APPLICATION_JSON).header("authorization",token.getAccesstoken())				
 				).andExpect(status().isOk()).andReturn();
 		assertThat(result.getResponse().getStatus()).isEqualTo(200);
 	}
